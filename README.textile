@@ -306,6 +306,26 @@ data = {"a" => 0, "b" => "taco"}
 JSON::Validator.validate(schema,data) # => false
 </pre>
 
+h3. Validate an ActiveModel (or ActiveRecord) object
+Since ActiveRecord classes include ActiveModel, this will also work for ActiveRecord objects.
+<pre>
+class MyModel
+  include ActiveModel::Model
+  include JSON::Schema::ActiveModelWithJsonSchema
+  
+  self.json_schema = {
+    "type" => "object",
+    "required" => ["required_property"],
+    "properties" => {
+      "required_property" => {"type" => "string"}
+    }
+  }
+end
+
+TestModel.new({'required_property' => "defined"}).valid? # => true
+TestModel.new({}).valid? # => false
+</pre>
+
 h2. JSON Backends
 
 The JSON Schema library currently supports the <code>json</code> and <code>yajl-ruby</code> backend JSON parsers. If either of these libraries are installed, they will be automatically loaded and used to parse any JSON strings supplied by the user.
