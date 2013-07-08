@@ -307,6 +307,7 @@ JSON::Validator.validate(schema,data) # => false
 </pre>
 
 h3. Validate an ActiveModel (or ActiveRecord) object
+
 Since ActiveRecord classes include ActiveModel, this will also work for ActiveRecord objects.
 <pre>
 class MyModel
