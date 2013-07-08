@@ -311,16 +311,16 @@ h3. Validate an ActiveModel (or ActiveRecord) object
 Since ActiveRecord classes include ActiveModel, this will also work for ActiveRecord objects.
 <pre>
 class MyModel
-  include ActiveModel::Model
-  include JSON::Schema::ActiveModelWithJsonSchema
+	include ActiveModel::Model
+	include JSON::Schema::ActiveModelWithJsonSchema
   
-  self.json_schema = {
-    "type" => "object",
-    "required" => ["required_property"],
-    "properties" => {
-      "required_property" => {"type" => "string"}
-    }
-  }
+	self.json_schema = {
+		"type" => "object",
+		"required" => ["required_property"],
+		"properties" => {
+	  	"required_property" => {"type" => "string"}
+		}
+	}
 end
 
 TestModel.new({'required_property' => "defined"}).valid? # => true
