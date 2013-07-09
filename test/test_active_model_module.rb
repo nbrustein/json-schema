@@ -2,7 +2,6 @@ require 'test/unit'
 require File.dirname(__FILE__) + '../../lib/json-schema'
 
 begin
-  require 'active_model'
   
   class JSONActiveModelModule < Test::Unit::TestCase
   

@@ -85,5 +85,5 @@ begin
     end
   end
   
-rescue
+rescue LoadError => e
 end
