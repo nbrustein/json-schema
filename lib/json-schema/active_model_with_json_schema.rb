@@ -25,7 +25,7 @@ begin
           json_schema['properties'].keys.each do |key|
             attr_accessor key.to_sym
           end
-          validates_json_schema json_schema
+          validates_json_schema
         end
       
       end
@@ -38,7 +38,8 @@ begin
       
         def validate_each(record, attribute, value)
           begin
-            JSON::Validator.validate!(options[:json_schema], record.as_json, :validate_schema => true)
+            json_schema = record.json_schema
+            JSON::Validator.validate!(json_schema, record.as_json, :validate_schema => true)
           rescue JSON::Schema::ValidationError
             record.errors.add(attribute, "not honored. #{$!.message}")
           end
@@ -59,7 +60,7 @@ begin
         #       }
         #     }
         #   end
-        def validates_json_schema(json_schema)
+        def validates_json_schema
           validates_with(JsonSchemaValidator, {
             :json_schema => json_schema,
             :attributes => [:json_schema]
