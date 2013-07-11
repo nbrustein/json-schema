@@ -62,7 +62,6 @@ begin
         #   end
         def validates_json_schema
           validates_with(JsonSchemaValidator, {
-            :json_schema => json_schema,
             :attributes => [:json_schema]
           })
         end
