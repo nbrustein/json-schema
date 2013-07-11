@@ -9,7 +9,7 @@ begin
       
         def self.included(target)
           target.send(:extend, ActiveModelWithJsonSchemaClassMethods)
-          target.send(:attr_reader, :json_schema)
+          target.send(:cattr_accessor, :json_schema)
         end
         
         def json_schema
@@ -21,7 +21,7 @@ begin
       module ActiveModelWithJsonSchemaClassMethods
       
         def json_schema=(json_schema)
-          @json_schema = json_schema
+          self.json_schema = json_schema
           json_schema['properties'].keys.each do |key|
             attr_accessor key.to_sym
           end
